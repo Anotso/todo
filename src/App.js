@@ -1,36 +1,28 @@
 import React, { useState } from 'react';
 import './App.css';
+import List from './List';
+import TodoForm from './TodoForm';
+import Item from './Item';
 
 function App() {
 
-  const [text, setText] = useState("");
   const [items, setItems] = useState([]);
 
-  function handleChange(event){
-    let t = event.target.value;
-    setText(t);
+  function onAddItem(text){
+    let item = new Item(text);
+    setItems([...items, item]);
   }
-  function addItem(event){
-    event.preventDefault();
-    let filterText = text.trim();
-    console.log(`Tamanho do text: ${text.length}`);
-    console.log(`Tamanho do filterText: ${filterText.length}`);
-    if(filterText){
-      setItems([...items, text]);
-    }
-    setText("");
+
+  function onItemDeleted(item){
+    let filteredItems = items.filter(it=>it.id !== item.id);
+    setItems(filteredItems);
   }
 
   return (
     <div className="container">
       <h1>Todo</h1>
-      <form>
-        <input type="text" onChange={handleChange} value={text}/>
-        <button onClick={addItem}>Adicionar</button>
-      </form>
-      <ul>
-        {items.map(item => <li>{item}</li>)}
-      </ul>
+      <TodoForm onAddItem={onAddItem}></TodoForm>
+      <List onItemDeleted={onItemDeleted} items={items}></List>
     </div>
   );
 }
