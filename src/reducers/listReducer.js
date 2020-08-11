@@ -1,5 +1,6 @@
 
 export default (state = [], action)=>{
+    // console.log(state);
     switch (action.type) {
         case "ADD_ITEM":
             return [...state, action.payload];
