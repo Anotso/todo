@@ -1,6 +1,9 @@
 import React from 'react';
 
+import { useDispatch } from 'react-redux';
+
 import Card from './Card';
+import {deleteItem, changeDone} from '../actions/ListAction'
 
 function ListItem(props){
 
@@ -12,13 +15,15 @@ function ListItem(props){
         }
       }
 
+      const dispatch = useDispatch()
+
     return(
         <li >
           <Card className={props.item.done ? "done item" : " item"} >
             {props.item.text}
             <div className="">
-              <button onClick={() => { props.onDone(props.item) }}><DoneImg done={props.item.done}></DoneImg></button>
-              <button onClick={() => { props.onItemDeleted(props.item) }}>Excluir</button>
+              <button onClick={() => { dispatch(changeDone(props.item.id)) }}><DoneImg done={props.item.done}></DoneImg></button>
+              <button onClick={() => { dispatch(deleteItem(props.item.id)) }}>Excluir</button>
             </div>
           </Card>
         </li>
