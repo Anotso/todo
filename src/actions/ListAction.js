@@ -1,8 +1,7 @@
 import Item from '../components/Item';
 
-export function addItem(text){
-    const item = new Item(text);
-    
+export function addItem(text, lastIdItem){
+    const item = new Item(text, lastIdItem);
     return {type: "ADD_ITEM", payload: item};
 }
 

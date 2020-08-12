@@ -1,18 +1,14 @@
 class Item{
 
-    static lastId = localStorage.getItem("lastId");
+    static lastId = 0;
 
-    constructor(text){
-        console.log(`Valor de lastId: ${Item.lastId}`);
-        if (Item.lastId === isNaN || Item.lastId === null || Item.lastId === undefined) {
-            Item.lastId = 0;
-        }else{
-            Item.lastId = parseInt(Item.lastId);
+    constructor(text, id){
+        if (Item.lastId === 0 && id !== 0) {
+            Item.lastId = id;
         }
         this.id = Item.lastId++;
         this.text = text;
         this.done = false;
-        localStorage.setItem("lastId", Item.lastId);
     }
 
 }

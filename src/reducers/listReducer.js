@@ -3,6 +3,7 @@ export default (state = [], action)=>{
     // console.log(state);
     switch (action.type) {
         case "ADD_ITEM":
+            console.log(`Valor do payload: ${action.payload}`);
             return [...state, action.payload];
             //NESTE CASO PARA ADD UM NOVO ITEM ELE VAI RECEBER VIA ACTION E INSERIR NO STATE DO REDUCER
         case "DELETE_ITEM":

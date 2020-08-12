@@ -6,15 +6,31 @@ function TodoForm(props) {
 
     const [text, setText] = useState("");
     const dispatch = useDispatch();
+    const [firstExe, setFirstExe] = useState(true);
 
     function handleChange(event) {
         let t = event.target.value;
         setText(t);
     }
+
+    function validatedId(){
+        let lastIdItems = 0;
+        if (props.isItems && firstExe) {
+            let sizeIsItems = props.isItems.length;
+            if(sizeIsItems>0){
+                lastIdItems = props.isItems[sizeIsItems-1].id + 1;
+                setFirstExe(false);
+            }
+        }
+        return lastIdItems;
+    }
+
     function addItemEvent(event) {
         event.preventDefault();
+        let id = 0;
         if (text.trim()) {
-            dispatch(addItem(text));
+            id = validatedId();
+            dispatch(addItem(text, id));
             props.onHideModal();
         }
         setText("");

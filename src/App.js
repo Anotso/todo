@@ -50,7 +50,7 @@ function App() {
         </header>
         <List ></List>
         <Modal show={showModal} onHideModal={onHideModal}>
-          <TodoForm onHideModal={onHideModal}></TodoForm>
+          <TodoForm onHideModal={onHideModal} isItems={store.getState()}></TodoForm>
         </Modal>
       </Provider>
     </div>
